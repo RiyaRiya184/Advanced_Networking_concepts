@@ -1,6 +1,6 @@
 # Advanced Networking Concepts in Cloud Computing
 This document explains key networking components used in cloud, virtualization, and Kubernetes environments — including TUN/TAP devices, virtual switches, overlay networks, and kernel-user data flow.
----
+
 ## 1. **TUN Interface**
 TUN (Network TUNnel)
 
@@ -9,14 +9,14 @@ TUN (Network TUNnel)
 -Used for routing traffic between virtual machines, VPNs, or containers.
 
 *Example:* OpenVPN and WireGuard use TUN interfaces to tunnel IP packets over an encrypted channel.
----
+
 ## 2. **TAP (Network TAP)**
 - Operates at **Layer 2 (Data Link Layer)**.
 - Simulates an **Ethernet device** and handles **Ethernet frames**.
 - Used for **bridging** or **connecting VMs** to virtual networks.
 
 *Example:* Used by libvirt and QEMU to connect VMs to a virtual bridge.
----
+
 ## 3. **Open vSwitch (OVS)**
 
 - **OVS** is a **virtual switch** that provides network automation and programmable control.
@@ -24,7 +24,7 @@ TUN (Network TUNnel)
 - Used in **KVM**, **OpenStack**, and **Kubernetes CNIs**.
 
 *Example:* Connects TAP interfaces and routes packets between VMs or containers.
----
+
 ## 4. VXLAN (Virtual Extensible LAN)
 
 - **Overlay network protocol** that extends Layer 2 over Layer 3.
@@ -33,7 +33,7 @@ TUN (Network TUNnel)
 - Common in **Kubernetes**, **OpenStack**, **Docker Swarm**.
 
 *Example:* Flannel or Calico use VXLAN tunnels to connect pods across nodes.
----
+
 ## 5. Flannel (CNI Plugin)
 
 - **Flannel** is a **Container Network Interface (CNI)** plugin for Kubernetes.
@@ -42,7 +42,7 @@ TUN (Network TUNnel)
 - Ensures every pod has a unique IP across the cluster.
 
 *Example:* Pod A on Node 1 can talk to Pod B on Node 2 through VXLAN encapsulation
----
+
 ## 6. Cilium (CNI Plugin with eBPF)
 
 - **Cilium** uses **eBPF** (Extended Berkeley Packet Filter) for networking and security.
@@ -50,7 +50,7 @@ TUN (Network TUNnel)
 - Enables **faster packet processing** and **fine-grained security**.
 
 *Example:* Cilium enforces network policies without relying on iptables.
----
+
 ## 7. Packet Copy 
 
 - In **traditional networking**, data is **copied multiple times** between **user space** and **kernel space**.
@@ -60,7 +60,7 @@ TUN (Network TUNnel)
 🧩 **Flow Example:**
 NIC → Kernel buffer → User buffer → Application
 *Used when data inspection or modification by applications is required.*
----
+
 ## 8. Zero Copy 
 
 - **Zero-copy** allows direct data transfer between **user space** and **kernel space** without intermediate copying.
@@ -69,7 +69,7 @@ NIC → Kernel buffer → User buffer → Application
 
 🧩 **Flow Example:**
 NIC → Shared memory → Application (no copy)
----
+
 ##  9. User Space ↔ Kernel Space
 
 - **User Space:** Where applications (e.g., browsers, APIs) run.  
@@ -77,7 +77,7 @@ NIC → Shared memory → Application (no copy)
 - Each system call or data transmission involves context switching between these spaces.
 
 *Zero-copy techniques minimize switching overhead for faster packet processing.*
----
+
 ## 10. Packet Routing in Libvirt
 
 - **Libvirt** manages networking for virtual machines using different modes:
@@ -87,7 +87,7 @@ NIC → Shared memory → Application (no copy)
 
 *Common bridge interface: `virbr0`.*
 
----
+
 ## 11. Nodes and Pods in Kubernetes
 
 ### **Node**
@@ -105,7 +105,7 @@ NIC → Shared memory → Application (no copy)
 
 *Each pod gets a unique IP across the cluster.*
 
----
+
 
 ## 12. k6t / veth Interfaces
 - `k6t`, `veth`, and `cni0` are **virtual Ethernet interfaces** in Linux.
@@ -114,7 +114,7 @@ NIC → Shared memory → Application (no copy)
 
 *Essential for Kubernetes and Docker networking.*
 
----
+
 ##  13. eth (Ethernet Interface)
 
 - Standard **Ethernet interfaces** (`eth0`, `eth1`, etc.).
@@ -123,7 +123,7 @@ NIC → Shared memory → Application (no copy)
 
 *`eth0` is typically the main network interface on a VM or host.*
 
----
+
 
 ## 14. DHCP (Dynamic Host Configuration Protocol)
 
@@ -135,7 +135,6 @@ NIC → Shared memory → Application (no copy)
   4. **Acknowledge**
 *Used by VMs and Pods to obtain internal IPs automatically.*
 
----
 
 ##  15. ARP (Address Resolution Protocol)
 
@@ -145,7 +144,7 @@ NIC → Shared memory → Application (no copy)
 
 *Without ARP, IP-based communication on local networks is impossible.*
 
----
+
 
 ## Summary Table
 
@@ -168,5 +167,4 @@ NIC → Shared memory → Application (no copy)
 | **DHCP** | L3 | Dynamic IP configuration |
 | **ARP** | L2 | Maps IP addresses to MAC addresses |
 
----
 
