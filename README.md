@@ -1,14 +1,14 @@
 # Advanced Networking Concepts in Cloud Computing
 This document explains key networking components used in cloud, virtualization, and Kubernetes environments — including TUN/TAP devices, virtual switches, overlay networks, and kernel-user data flow.
 
-## 1. **TUN Interface**
-TUN (Network TUNnel)
+## **1. TUN Interface (Network TUNnel )**
 
--A TUN interface operates at Layer 3 (Network Layer).
--It simulates a network device and handles IP packets.
--Used for routing traffic between virtual machines, VPNs, or containers.
+- Operates at **Layer 3 (Network Layer)**.
+- Simulates a network device and handles **IP packets**.
+- Used for **routing traffic** between VMs, VPNs, or containers.
 
-*Example:* OpenVPN and WireGuard use TUN interfaces to tunnel IP packets over an encrypted channel.
+ *Example:* OpenVPN and WireGuard use TUN interfaces to tunnel IP packets over an encrypted channel.
+
 
 ## 2. **TAP (Network TAP)**
 - Operates at **Layer 2 (Data Link Layer)**.
@@ -57,7 +57,7 @@ TUN (Network TUNnel)
 - Each packet may go through multiple memory buffers before transmission.
 - This introduces **CPU overhead** and **latency**.
 
-🧩 **Flow Example:**
+**Flow Example:**
 NIC → Kernel buffer → User buffer → Application
 *Used when data inspection or modification by applications is required.*
 
@@ -67,7 +67,7 @@ NIC → Kernel buffer → User buffer → Application
 - Reduces **CPU usage** and **memory bandwidth**.
 - Used in **high-performance networking**, **DPDK**, **io_uring**, and **eBPF** systems.
 
-🧩 **Flow Example:**
+ **Flow Example:**
 NIC → Shared memory → Application (no copy)
 
 ##  9. User Space ↔ Kernel Space
